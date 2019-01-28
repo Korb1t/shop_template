@@ -22,7 +22,11 @@ from shop_temp.views import *
 urlpatterns = [
     re_path('^category/(?P<category_slug>[-\w]+)/$', category_view, name='category_detail'),
     re_path('^product/(?P<product_slug>[-\w]+)/$', product_view, name='product_detail'),
+    re_path('^add_to_cart/$', add_to_cart_view, name='add_to_cart'),
+    re_path('^remove_from_cart/$', remove_from_cart_view, name='remove_from_cart'),
     path('admin/', admin.site.urls),
+    path('home/', homepage),
+    path('cart/', cart_view, name='cart'),
     re_path('^$', homepage),
 ]
 

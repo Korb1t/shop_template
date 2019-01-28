@@ -38,8 +38,10 @@
                     <a class="nav-link" href="#">Services</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="{% url 'cart' %}">Cart<span
+                            class="badge" id="cart_count">{{ cart.items.count }}</span></a>
                 </li>
+
             </ul>
         </div>
     </div>
@@ -53,8 +55,11 @@
         <div class="col-lg-3">
             <br>
             <br>
-            <h1 class="my-4">Shop Name</h1>
+            <br>
+            <h2><strong>Categories</strong></h2>
+            <hr>
             <div class="list-group">
+
                 {% for category in categories %}
                     <a href="{{ category.get_absolute_url }}" class="list-group-item">{{ category.name }}</a>
                 {% endfor %}
@@ -106,12 +111,14 @@
                                     <a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
                                 </h6>
                                 <h5>{{ product.price }} UAH</h5>
+                                <a href="#">
+                                    <button class="btn btn-danger">Add to cart</button>
+                                </a>
                                 <p class="card-text">{{ product.description }}</p>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-
             </div>
 
         </div>
@@ -132,6 +139,25 @@
 </footer>
 
 
+<script>
+    $(document).ready(function () {
+        $('.add_to_cart').on('click', function (e) {
+            e.preventDefault()
+            product_slug = $(this).attr('data-slug')
+            data = {
+                product_slug: product_slug
+            }
+            $.ajax({
+                type: "GET",
+                url: "{% url 'add_to_cart' %}",
+                data: data,
+                success: function (data) {
+                    $('#cart_count').html(data.cart_total)
+                }
+            })
+        })
+    })
+</script>
 </body>
 
 </html>

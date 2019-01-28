@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+</head>
+<body>
+<a href="/home"><button class="btn btn-danger">Home</button></a>
+<h3 class="text-center"><strong>Your Cart</strong></h3>
+<table class="table">
+    <tr>
+        <td class="text-center"><strong>Product</strong></td>
+        <td class="text-center"><strong>QTY</strong></td>
+        <td class="text-center"><strong> Price</strong></td>
+        <td class="text-center"></td>
+    </tr>
+    {% for item in cart.items.all %}
+        <tr>
+            <td class="text-center"><strong>{{ item.product.title }}</strong></td>
+            <td class="text-center"><strong>{{ item.qty }}</strong></td>
+            <td class="text-center"><strong>{{ item.item_total }}</strong></td>
+            <td class="text-center"><a href="#">
+                <button class="btn btn-danger">DELETE</button>
+            </a></td>
+        </tr>
+    {% endfor %}
+</table>
+</body>
+</html>
