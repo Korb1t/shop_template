@@ -1,6 +1,6 @@
-*.pyc
-/.idea
-/.env
-*.sqlite3
+.pyc
+.idea
+.env
+.sqlite3
 .vscode/
 */migrations/.env
